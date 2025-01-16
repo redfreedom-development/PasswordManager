@@ -30,8 +30,16 @@ class DetalleViewController: UIViewController {
         
         //rellenamos los campos
         lbUserLogin.text=userLogin
-        imgPlataforma.image=UIImage(named: registro.plataforma) ?? UIImage(systemName: "envelope")
-        lbPlataformaOther.text=registro.plataforma
+       // imgPlataforma.image=UIImage(named: registro.plataforma) ?? UIImage(systemName: "envelope")
+        if let platformImage = UIImage(named: registro.plataforma) {
+            imgPlataforma.image = platformImage
+            lbPlataformaOther.text = nil
+            // Si se encuentra la imagen, no es necesario rellenar el label
+        } else {
+            imgPlataforma.image = UIImage(systemName: "envelope")
+            // Rellenar el label con el nombre de la plataforma
+            lbPlataformaOther.text = registro.plataforma
+        }
         txtUser.text=registro.user
         txtPassword.text=registro.password
         txtUser.isEnabled=false
